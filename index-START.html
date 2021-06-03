@@ -96,6 +96,41 @@
   </div>
 
 <script>
-</script>
+  const checkBoxes = document.querySelectorAll('.inbox input[type="checkbox"]')
+  console.log(checkBoxes);
+  
+  let lastChecked = ''
+  let checkOrder = false
+  function handleCheck (e) {
+
+    console.log(e);
+    //if maj is pressed & box is not uncheck
+    if (e.shiftKey === true && this.checked === true) {
+      checkBoxes.forEach( checkBox => {
+    // toggle check flag inbetween both checked boxes  
+        if ( checkBox === this || checkBox === lastChecked) {
+          checkOrder = !checkOrder
+        }
+        if (checkOrder) {
+          checkBox.checked = true
+        }
+      })
+    }
+
+    lastChecked = this                          // store last checked before hitting maj+check
+    console.log(`lastChecked`, {lastChecked})
+  }
+  
+  
+  
+  
+  checkBoxes.forEach( checkBox => {
+    checkBox.addEventListener('click', handleCheck)
+  })
+
+
+
+
+  </script>
 </body>
 </html>
